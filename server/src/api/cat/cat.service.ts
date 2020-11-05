@@ -4,7 +4,7 @@ import { ICat, IBreeds, IBreed, IBreedImage, ICatSchema } from './interface';
 
 const API_URL = 'https://api.thecatapi.com/v1/';
 const headers = {
-  'x-api-key': 'b4a6b15d-79e7-423c-8834-f4e984037785',
+  'x-api-key': process.env.API_KEY,
 };
 
 export const searchBreeds = async (name: string): Promise<ICat[]> => {
