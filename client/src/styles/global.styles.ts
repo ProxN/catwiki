@@ -14,6 +14,7 @@ export default createGlobalStyle`
         box-sizing:border-box;
         height:100%;
         width:100%;
+        font-size:10px;
     }
     
     #root,
@@ -26,10 +27,11 @@ export default createGlobalStyle`
         line-height:1.6;
         font-weight:normal;
         ${({ theme }) => css`
-          background-color: ${theme.colors.primary.dark};
-          font-size: ${theme.fontSizes.small};
-          color: ${theme.colors.gray.light};
-          font-family: ${theme.fonts.primary};
+          background-color: ${theme.colors.bg};
+          font-size: ${theme.fontSizes[1]}px;
+          color: ${theme.colors.primary.main};
+          font-family: ${theme.fontFamily};
+          line-height: ${theme.lineHeight};
         `};
     }
 
@@ -40,25 +42,11 @@ export default createGlobalStyle`
     h1,h2,h3,h4,h5,h6{
         font-weight:normal;
         margin:0;
-        font-family:${({ theme }) => theme.fonts.secondary};
     }
 
-    section{
-        padding:0px 50px;
-        height:100vh;
-        ${Media.thone}{
-            padding:0 25px;
-        }
+    section {
+        padding: 0 2rem;
     }
 
-    
-    ::-webkit-scrollbar {
-        background:#2d2b4c;
-        width:5px;
-    }
-    ::-webkit-scrollbar-thumb {
-        background:#484567;
-        border-radius:5px;
-    }
-    
+
 `;

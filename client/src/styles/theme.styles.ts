@@ -1,12 +1,12 @@
 import { DefaultTheme } from 'styled-components';
 
-const fontSizes = [12, 14, 16, 18, 24, 34, 58, 72];
+const fontSizes = [12, 14, 16, 18, 24, 34, 48, 58, 72];
 
 const colors = {
   primary: {
-    light: '#71b7e6',
-    main: '#48a2df',
-    dark: '#2a7aaf',
+    light: '#4D270C',
+    main: '#291507',
+    dark: '#251306',
   },
   secondary: {
     light: '#f5a092',
@@ -41,13 +41,15 @@ const colors = {
     main: '#fff',
     secondary: '#e9eaeb',
   },
-  bg: '#272c36',
-  bgInverse: '#fff',
+  bg: '#fff',
+  bgInverse: '#E3E1DC',
+  borderColor: 'rgba(39,44,54,.3)',
+  borderFocus: 'rgba(39,44,54,.8)',
 };
 
 const lineHeight = 1.5;
-const fontFamily = "'Source Sans Pro', Helvetica, sans-serif";
-const fontWeights = [400, 600, 700];
+const fontFamily = "'Montserrat', Helvetica, sans-serif";
+const fontWeights = [400, 500, 600, 700];
 
 const Theme: DefaultTheme = {
   colors,
@@ -55,8 +57,8 @@ const Theme: DefaultTheme = {
   fontFamily,
   fontSizes,
   fontWeights,
-  fontSizeBase: fontSizes[2],
-  borderRadius: '2px',
+  fontSizeBase: fontSizes[1],
+  borderRadius: '24px',
 };
 
 export default Theme;
