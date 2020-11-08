@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import config from '../../../../constants/config';
 import Container from '../../../../components/Container';
 import Input from '../../../../components/Input';
@@ -7,7 +8,7 @@ import { ReactComponent as Logo } from '../../../../assets/logo.svg';
 import { ReactComponent as CloseSVG } from '../../../../assets/close.svg';
 import { ReactComponent as Arrow } from '../../../../assets/arrow.svg';
 import { ReactComponent as SearchIcon } from '../../../../assets/search-icon.svg';
-
+import { TopBreed, TopBreedResponse } from '../../../types';
 import {
   BannerContainer,
   BannerContent,
@@ -39,6 +40,7 @@ interface GetBreedResponse {
 
 const Hero: React.FC = () => {
   const [breeds, setBreeds] = useState<Breed[]>([]);
+  const [topBreeds, setTopBreeds] = useState<TopBreed[]>([]);
   const [searchBreeds, setSearchBreeds] = useState<Breed[]>([]);
   const [searchValue, setSearchValue] = useState('');
   const [focused, setFocused] = useState(false);
@@ -51,7 +53,17 @@ const Hero: React.FC = () => {
         setBreeds(data.data);
       }
     };
+
+    const getTopBreeds = async (): Promise<void> => {
+      const url = `${config.API_URL}breeds/top?limit=4`;
+      const { data } = await axios.get<TopBreedResponse>(url);
+      if (data.data) {
+        setTopBreeds(data.data);
+      }
+    };
+
     onLoad();
+    getTopBreeds();
   }, []);
 
   useEffect(() => {
@@ -120,44 +132,19 @@ const Hero: React.FC = () => {
           <Title>Most searched breeds</Title>
           <DiscoverGroup>
             <DiscoverHeading>67+ Breeds For you to discover</DiscoverHeading>
-            <SeeMore>
+            <SeeMore as={Link} to='/breeds/top'>
               See more
               <Arrow />
             </SeeMore>
           </DiscoverGroup>
           <PopularBreeds>
-            <BreedCard>
-              <img
-                src='https://cdn2.thecatapi.com/images/JWOrjbhum.jpg'
-                alt='British Longhair
-'
-              />
-              <BreedName>British Longhair</BreedName>
-            </BreedCard>
-            <BreedCard>
-              <img
-                src='https://cdn2.thecatapi.com/images/JWOrjbhum.jpg'
-                alt='British Longhair
-'
-              />
-              <BreedName>British Longhair</BreedName>
-            </BreedCard>
-            <BreedCard>
-              <img
-                src='https://cdn2.thecatapi.com/images/JWOrjbhum.jpg'
-                alt='British Longhair
-'
-              />
-              <BreedName>British Longhair</BreedName>
-            </BreedCard>
-            <BreedCard>
-              <img
-                src='https://cdn2.thecatapi.com/images/JWOrjbhum.jpg'
-                alt='British Longhair
-'
-              />
-              <BreedName>British Longhair</BreedName>
-            </BreedCard>
+            {topBreeds.length > 0 &&
+              topBreeds.map((el) => (
+                <BreedCard as={Link} to={`/breeds/${el.name}`}>
+                  <img src={el.imageUrl} alt={el.name} />
+                  <BreedName>{el.name}</BreedName>
+                </BreedCard>
+              ))}
           </PopularBreeds>
         </Discover>
       </Container>

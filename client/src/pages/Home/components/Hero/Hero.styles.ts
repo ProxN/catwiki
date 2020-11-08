@@ -164,10 +164,11 @@ export const DiscoverGroup = styled.div`
   }
 `;
 
-export const SeeMore = styled.span`
+export const SeeMore = styled.a`
   ${({ theme }) => css`
     font-weight: ${theme.fontWeights[3]};
     font-size: ${theme.fontSizes[3]}px;
+    color: ${theme.colors.primary.main};
   `};
   text-transform: uppercase;
   opacity: 0.6;
@@ -230,6 +231,7 @@ export const PopularBreeds = styled.div`
 export const BreedCard = styled.div`
   cursor: pointer;
   position: relative;
+  color: ${({ theme }) => theme.colors.primary.main};
 
   :nth-child(1)::before {
     content: '';

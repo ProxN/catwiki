@@ -51,6 +51,7 @@
     "@typescript-eslint/comma-dangle":"off",
     "@typescript-eslint/no-empty-interface":"off",
     "react/jsx-props-no-spreading":"off",
-    "@typescript-eslint/indent":"off"
+    "@typescript-eslint/indent":"off",
+    "react/jsx-indent":"off"
   }
 }

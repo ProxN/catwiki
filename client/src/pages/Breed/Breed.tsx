@@ -9,13 +9,7 @@ import { GetBreedResponse, IBreed } from './types';
 
 const MainContainer = styled.main`
   padding: 5rem 0;
-`;
-
-export const LoaderContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: calc(100% - 16.4rem);
+  min-height: 100%;
 `;
 
 const Breed: React.FC = () => {
@@ -37,9 +31,7 @@ const Breed: React.FC = () => {
   return (
     <MainContainer>
       {isLoading ? (
-        <LoaderContainer>
-          <Loader />
-        </LoaderContainer>
+        <Loader />
       ) : (
         <div>
           <BreedInfo breed={breed} />
