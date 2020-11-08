@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import LazyLoad from 'react-lazyload';
 import styled, { css } from 'styled-components';
 import axios from 'axios';
 import config from '../../constants/config';
@@ -84,7 +85,9 @@ const TopBreeds: React.FC = () => {
           {breeds.length > 0 &&
             breeds.map((el, i) => (
               <BreedItem key={el._id}>
-                <BreedImage src={el.imageUrl} alt={el.name} />
+                <LazyLoad>
+                  <BreedImage src={el.imageUrl} alt={el.name} />
+                </LazyLoad>
                 <BreedInfo>
                   <BreedName>{`${i + 1}. ${el.name}`}</BreedName>
                   <BreedDescription>{el.description}</BreedDescription>

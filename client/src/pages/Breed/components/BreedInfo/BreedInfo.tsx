@@ -1,4 +1,5 @@
 import React from 'react';
+import LazyLoad from 'react-lazyload';
 import Container from '../../../../components/Container';
 import { IBreed } from '../../types';
 import {
@@ -78,10 +79,16 @@ const BreedInfo: React.FC<BreedInfoProps> = ({ breed }) => {
         <Photos>
           <Heading>Other photos</Heading>
           <PhotosGrid>
-            {breed.images.slice(1).map((el, i) => (
+            {breed.images.slice(1).map((el) => (
               // eslint-disable-next-line jsx-a11y/img-redundant-alt
               // eslint-disable-next-line react/no-array-index-key
-              <BreedPhoto src={el} alt={breed.name} key={`image-${i}`} />
+              <LazyLoad>
+                <BreedPhoto
+                  src={el}
+                  alt={breed.name}
+                  key={`image-${Math.random()}`}
+                />
+              </LazyLoad>
             ))}
           </PhotosGrid>
         </Photos>

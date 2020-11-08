@@ -1,4 +1,5 @@
 import React from 'react';
+import LazyLoad from 'react-lazyload';
 import Container from '../../../../components/Container';
 import { ReactComponent as Arrow } from '../../../../assets/arrow.svg';
 import Image1 from '../../../../assets/image2.png';
@@ -33,10 +34,16 @@ const Info: React.FC = () => {
           </div>
           <InfoImages>
             <div>
-              <Image src={Image1} alt='image1' width='273px' />
-              <Image src={Image2} alt='image3' height='293px' />
+              <LazyLoad>
+                <Image src={Image1} alt='image1' width='273px' />
+              </LazyLoad>
+              <LazyLoad>
+                <Image src={Image2} alt='image3' height='293px' />
+              </LazyLoad>
             </div>
-            <Image src={Image3} alt='image3' height='385px' />
+            <LazyLoad>
+              <Image src={Image3} alt='image3' height='385px' />
+            </LazyLoad>
           </InfoImages>
         </InfoContent>
       </Container>
