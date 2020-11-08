@@ -4,7 +4,9 @@ import Header from './Header';
 import { GlobalStyles } from '../../styles';
 import Footer from './Footer';
 
-const LayoutContainer = styled.div``;
+const LayoutContainer = styled.div`
+  height: 100%;
+`;
 
 const Layout: React.FC = ({ children }) => {
   return (

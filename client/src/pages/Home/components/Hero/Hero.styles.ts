@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Media } from '../../../../styles';
 import Image from '../../../../assets/HeroImagelg.png';
 import ImageMD from '../../../../assets/HeroImagemd.png';
@@ -68,7 +69,7 @@ export const HeroLogo = styled.h1`
 export const SearchForm = styled.form`
   margin-top: 5.2rem;
   width: 39rem;
-
+  position: relative;
   ${Media.desktop} {
     width: 30rem;
   }
@@ -234,4 +235,31 @@ export const BreedName = styled.span`
   `};
   margin-top: 1.6rem;
   display: inline-block;
+`;
+
+export const BreedsSearchList = styled.div`
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  top: 7rem;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  padding: 0.6rem 1.2rem;
+  max-height: 24rem;
+  z-index: 99;
+  overflow-y: auto;
+`;
+
+export const BreedItem = styled(Link)`
+  ${({ theme }) => css`
+    font-weight: ${theme.fontWeights[1]};
+    font-size: ${theme.fontSizes[2]};
+    color: ${theme.colors.primary.main};
+  `};
+  display: block;
+  padding: 1rem 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+  :hover {
+    background: rgba(151, 151, 151, 0.2);
+  }
 `;

@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import config from '../../../../constants/config';
 import Container from '../../../../components/Container';
 import Input from '../../../../components/Input';
 import { ReactComponent as Logo } from '../../../../assets/logo.svg';
@@ -19,9 +21,52 @@ import {
   DiscoverGroup,
   SeeMore,
   BreedName,
+  BreedsSearchList,
+  BreedItem,
 } from './Hero.styles';
 
+interface Breed {
+  id: string;
+  name: string;
+}
+
+interface GetBreedResponse {
+  status: string;
+  data: Breed[];
+}
+
 const Hero: React.FC = () => {
+  const [breeds, setBreeds] = useState<Breed[]>([]);
+  const [searchBreeds, setSearchBreeds] = useState<Breed[]>([]);
+  const [searchValue, setSearchValue] = useState('');
+
+  useEffect(() => {
+    const onLoad = async (): Promise<void> => {
+      const url = `${config.API_URL}breeds`;
+      const { data } = await axios.get<GetBreedResponse>(url);
+      if (data.data) {
+        setBreeds(data.data);
+      }
+    };
+    onLoad();
+  }, []);
+
+  useEffect(() => {
+    if (searchValue) {
+      const filteredBreeds = breeds.filter((el) =>
+        el.name.toLowerCase().includes(searchValue)
+      );
+      setSearchBreeds(filteredBreeds);
+    }
+  }, [searchValue]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchValue(e.target.value);
+    if (!e.target.value) {
+      setSearchBreeds([]);
+    }
+  };
+
   return (
     <section>
       <Container>
@@ -33,11 +78,25 @@ const Hero: React.FC = () => {
             <HeroLogo>Get to know more about your cat breed</HeroLogo>
             <SearchForm>
               <Input
+                onChange={handleChange}
+                value={searchValue}
                 icon={<SearchIcon />}
                 rounded
                 fullWidth
                 placeholder='Enter your breed'
               />
+              {searchBreeds.length > 0 && (
+                <BreedsSearchList>
+                  {searchBreeds.map((el) => (
+                    <BreedItem
+                      to={{ pathname: `/breeds/${el.name}`, state: el.id }}
+                      key={el.id}
+                    >
+                      {el.name}
+                    </BreedItem>
+                  ))}
+                </BreedsSearchList>
+              )}
             </SearchForm>
           </BannerContent>
         </BannerContainer>
