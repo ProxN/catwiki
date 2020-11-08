@@ -34,3 +34,18 @@ export const getBreeds = catchAsync(
     });
   }
 );
+
+export const topBreeds = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    let breedLimit = 0;
+    if (req.query && req.query.limit) {
+      breedLimit = (req.query as any).limit;
+    }
+    const data = await catService.topCatBreed(breedLimit);
+    res.status(200).json({
+      message: 'success',
+      results: data.length,
+      data: data,
+    });
+  }
+);

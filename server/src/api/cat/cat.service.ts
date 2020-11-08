@@ -45,6 +45,7 @@ export const trackBreed = async (
       const newBreed = await catModel.create({
         breedId: breeds[0].id,
         name: breeds[0].name,
+        description: breeds[0].description,
         imageId: id,
         imageUrl: url,
         searchCount: 1,
@@ -56,7 +57,11 @@ export const trackBreed = async (
 };
 
 export const topCatBreed = async (limit: number): Promise<ICatSchema[]> => {
-  const topBreeds = await catModel.find().sort({ searchCount: 1 }).limit(limit);
+  const breedLimit = +limit || 10;
+  const topBreeds = await catModel
+    .find()
+    .sort({ searchCount: -1 })
+    .limit(breedLimit);
   return topBreeds;
 };
 

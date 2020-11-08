@@ -62,4 +62,5 @@ export interface ICatSchema extends IBreed, Document {
   searchCount: number;
   imageUrl: string;
   imageId: string;
+  description: string;
 }
