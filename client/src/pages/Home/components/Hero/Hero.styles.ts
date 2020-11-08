@@ -66,7 +66,23 @@ export const HeroLogo = styled.h1`
   }
 `;
 
-export const SearchForm = styled.form`
+export const CloseButton = styled.button`
+  color: ${({ theme }) => theme.colors.primary.main};
+  width: 4rem;
+  height: 4rem;
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
+  background: rgba(151, 151, 151, 0.1);
+  display: none;
+`;
+
+export const SearchForm = styled.div<{ focused?: boolean }>`
   margin-top: 5.2rem;
   width: 39rem;
   position: relative;
@@ -78,6 +94,22 @@ export const SearchForm = styled.form`
   }
   ${Media.thone} {
     width: 13rem;
+    ${({ focused }) =>
+      focused &&
+      css`
+        position: fixed;
+        top: 0;
+        margin: 0;
+        left: 0;
+        background: #fff;
+        z-index: 999;
+        width: 100%;
+        padding: 1.6rem 2rem;
+        box-shadow: 0 0 10px -1px rgba(0, 0, 0, 0.2);
+        ${CloseButton} {
+          display: flex;
+        }
+      `};
   }
 `;
 
@@ -247,6 +279,10 @@ export const BreedsSearchList = styled.div`
   max-height: 24rem;
   z-index: 99;
   overflow-y: auto;
+  ${Media.thone} {
+    position: relative;
+    top: 0;
+  }
 `;
 
 export const BreedItem = styled(Link)`

@@ -4,6 +4,7 @@ import config from '../../../../constants/config';
 import Container from '../../../../components/Container';
 import Input from '../../../../components/Input';
 import { ReactComponent as Logo } from '../../../../assets/logo.svg';
+import { ReactComponent as CloseSVG } from '../../../../assets/close.svg';
 import { ReactComponent as Arrow } from '../../../../assets/arrow.svg';
 import { ReactComponent as SearchIcon } from '../../../../assets/search-icon.svg';
 
@@ -23,6 +24,7 @@ import {
   BreedName,
   BreedsSearchList,
   BreedItem,
+  CloseButton,
 } from './Hero.styles';
 
 interface Breed {
@@ -39,6 +41,7 @@ const Hero: React.FC = () => {
   const [breeds, setBreeds] = useState<Breed[]>([]);
   const [searchBreeds, setSearchBreeds] = useState<Breed[]>([]);
   const [searchValue, setSearchValue] = useState('');
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
     const onLoad = async (): Promise<void> => {
@@ -67,6 +70,14 @@ const Hero: React.FC = () => {
     }
   };
 
+  const handleBlur = (): void => {
+    setFocused(false);
+    setSearchValue('');
+  };
+  const handleInputFocus = (): void => {
+    setFocused(true);
+  };
+
   return (
     <section>
       <Container>
@@ -76,8 +87,13 @@ const Hero: React.FC = () => {
               <Logo />
             </ImageLogo>
             <HeroLogo>Get to know more about your cat breed</HeroLogo>
-            <SearchForm>
+            <SearchForm focused={focused}>
+              <CloseButton onClick={handleBlur}>
+                <CloseSVG />
+              </CloseButton>
               <Input
+                onBlur={handleBlur}
+                onFocus={handleInputFocus}
                 onChange={handleChange}
                 value={searchValue}
                 icon={<SearchIcon />}

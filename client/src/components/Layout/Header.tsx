@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../../assets/logo.svg';
 import Container from '../Container';
 
@@ -14,7 +15,7 @@ export const Navbar = styled.nav`
   align-items: center;
   height: 100%;
 `;
-export const Logo = styled.a`
+export const Logo = styled(Link)`
   cursor: pointer;
 `;
 
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
     <HeaderContainer>
       <Container>
         <Navbar>
-          <Logo>
+          <Logo to='/'>
             <LogoSVG />
           </Logo>
         </Navbar>

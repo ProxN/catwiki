@@ -7,9 +7,11 @@ interface InputProps extends InputStyleProps {
   icon?: React.ReactNode;
   label?: string;
   type?: 'text' | 'password' | 'email';
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?: string;
   value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: () => void;
+  onFocus?: () => void;
 }
 
 const Input: React.FC<InputProps> = (props) => {

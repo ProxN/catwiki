@@ -50,6 +50,7 @@
     "@typescript-eslint/no-floating-promises": "off",
     "@typescript-eslint/comma-dangle":"off",
     "@typescript-eslint/no-empty-interface":"off",
-    "react/jsx-props-no-spreading":"off"
+    "react/jsx-props-no-spreading":"off",
+    "@typescript-eslint/indent":"off"
   }
 }
